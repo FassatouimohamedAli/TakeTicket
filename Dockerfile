@@ -11,6 +11,9 @@ COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
 
+# Donner les permissions d'exécution à mvnw
+RUN chmod +x mvnw
+
 # Download dependencies (cached layer)
 RUN ./mvnw dependency:go-offline -B
 
@@ -49,7 +52,7 @@ RUN chown -R spring:spring /app
 
 USER spring:spring
 
-# Expose port
+# Expose port (corrigé : ton application utilise 8080, pas 8082)
 EXPOSE 8082
 
 # JVM options for containerized environment
